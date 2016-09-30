@@ -1,0 +1,200 @@
+body {
+  overflow-y: scroll;
+  font-family: sans-serif;
+}
+
+.info-box {
+  padding: 1em;
+  margin: 0;
+  border-radius: 0.25em;
+  background-color: black;
+  color: white;
+}
+
+/* Chart Styles */
+.c3.plot .brush .unbrush {
+    fill: black;
+    opacity: 0.6;
+}
+
+.c3.plot .layer.line path {
+    stroke-width: 2px;
+}
+
+.c3.plot .layer.area path {
+    fill-opacity: 0.75;
+}
+
+.c3.axis .tick line {
+    stroke: darkgray;
+}
+.c3.axis line.grid {
+    stroke-dasharray: 2,2;
+}
+
+/* Table Styles */
+table {
+    border-collapse: collapse;
+}
+
+.c3.table {
+    border: 1px solid black;
+    font-family: sans-serif;
+}
+.c3.table th {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    padding: 0.25em;
+    border: 1px solid black;
+    border-bottom: 2px solid black;
+    background-color: lightgray;
+}
+.c3.table caption {
+    border: 1px solid black;
+}
+.c3.table tr {
+    background-color: white;
+}
+.c3.table tr:nth-child(2n) {
+    background-color: whitesmoke;
+}
+.c3.table th.sorted {
+    background-color: steelblue;
+}
+.c3.table tr.selected {
+    background-image: linear-gradient(#ffeda0,#f9da4d);
+}
+.c3.table tr.deselected:not(:hover) {
+    opacity: 0.4;
+}
+.c3.table.selectable tr.hover {
+    background-color: wheat;
+}
+
+.c3.table td {
+    text-align: center;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 0.25em;
+}
+.c3.table td.sorted {
+    background-color: rgba(128,128,128,0.1);
+}
+
+/* Style World Bank concepts */
+.c3.plot .layer.serie1 path {
+    fill: darkslategray;
+    opacity: 0.5;
+}
+.c3.plot .layer.agriculture path {
+    fill: darkgreen;
+    stroke: darkgreen;
+}
+.c3.plot .layer.services path {
+    fill: darkblue;
+    stroke: darkblue;
+}
+.c3.plot .layer.manufacturing path {
+    fill: darkred;
+    stroke: darkred;
+}
+.c3.plot .layer.line path {
+    fill: none;
+}
+
+.c3.plot.urban .layer.area path {
+    fill: indigo;
+}
+.c3.plot.urban .layer.line {
+    stroke: orange;
+    fill: orange;
+}
+
+.c3.plot .layer.selected_year line {
+    stroke-width: 3px;
+    stroke: red;
+    stroke-dasharray: 5,3;
+}
+
+/* Pulse charts when hovering over legend item */
+.legend_hover {
+    -moz-animation: opacity_pulse 1s infinite;
+    -o-animation: opacity_pulse 1s infinite;
+    -webkit-animation: opacity_pulse 1s infinite;
+    animation: opacity_pulse 1s infinite;
+}
+
+#chart {
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+text {
+  pointer-events: none;
+}
+
+.grandparent text {
+  font-weight: bold;
+}
+
+rect {
+  fill: none;
+  stroke: #fff;
+}
+
+rect.parent,
+.grandparent rect {
+  stroke-width: 2px;
+}
+
+rect.parent {
+  pointer-events: none;
+}
+
+.grandparent rect {
+  fill: orange;
+}
+
+.grandparent:hover rect {
+  fill: #ee9700;
+}
+
+.children rect.parent,
+.grandparent rect {
+  cursor: pointer;
+}
+
+.children rect.parent {
+  fill: #bbb;
+  fill-opacity: .5;
+}
+
+.children:hover rect.child {
+  fill: #bbb;
+}
+
+@-moz-keyframes opacity_pulse {
+  0% { opacity: 1; }
+  80% { opacity: 0.1; }
+}
+
+@-o-keyframes opacity_pulse {
+  0% { opacity: 1; }
+  80% { opacity: 0.1; }
+}
+
+@-webkit-keyframes opacity_pulse {
+  0% { opacity: 1; }
+  80% { opacity: 0.1; }
+}
+
+@keyframes opacity_pulse {
+  0% { opacity: 1; }
+  80% { opacity: 0.1; }
+}

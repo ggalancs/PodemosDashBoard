@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PODEMOS - Cuentas claras</title>
+    <meta name="description" content="Portal de transparencia del partido político PODEMOS">
+
+    <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/bootstrap-slider.min.css">
+    <!--
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+    <!--STYLES-->
+
+    <!--STYLES END-->
+
+    <!-- Dependencies -->
+    <script src="lib/d3.v3.min.js"></script>
+    <script src="lib/crossfilter.min.js"></script>
+    <script src="lib/promise.js"></script>
+    <script src="lib/jquery-1.8.2.min.js"></script>
+    <script src="lib/jquery-3.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/moment-with-locales.min.js"></script>
+    <script src="lib/bootstrap-datetimepicker.js"></script>
+    <script src="lib/bootstrap-slider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <!-- C3 -->
+    <link rel="stylesheet" href="css/c3.min.css" />
+    <script src="lib/c3.js"></script>
+    <script src="lib/c3-table.js"></script>
+    <script src="lib/c3-plot.js"></script>
+    <script src="lib/c3-layers.js"></script>
+    <script src="lib/c3-legend.js"></script>
+    <script src="lib/c3-treemap.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+       #filterWrapper {
+          width: 100%;
+        }
+        #filterGP {
+          width: 20%;
+          float: left;
+        }
+        #filterCategory {
+          width: 20%;
+          float: left;
+        }
+        #filterDFrom {
+          width: 20%;
+          height: 30px;
+          float: left;
+        }
+        #filterDTo {
+          width: 20%;
+          float: left;
+        }
+        #filterValue {
+          background-color: bisque;
+          width: 20%;
+          float: left;
+        }
+
+        select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        .FICheckRadio {
+          float: left;
+        }
+
+        #slider_container {
+          height: 34px;
+        }
+        .min-slider-handle.custom::before {
+          line-height: 20px;
+          font-family: "FontAwesome";
+          font-size: 20px;
+          content: "\f0a8";
+          color: #726204;
+          }
+        .max-slider-handle.custom::before {
+          line-height: 20px;
+          font-family: "FontAwesome";
+          font-size: 20px;
+          content: "\f0a9";
+          color: #726204;
+          }
+        .slider.slider-horizontal {
+          width: 90%;
+          left: 5%;
+          top:7px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>GRUPOS PARLAMENTARIOS AUTONÓMICOS</h3>
+
+    <hr />
+    <span id="waiting"><b>Cargando Datos...</b></span>
+
+    <main style="display:none">
+      <div style="width:33%; float:left">
+        <div id="podemos_treemap"></div>
+      </div>
+
+      <div style="width:24%; float:left">
+        <div id="podemos_legend_areas" ></div>
+      </div>
+
+      <div style="width:33%; float:left">
+        <div id="podemos_stacked_areas" ></div>
+      </div>
+
+      <div id="filterWrapper" style="width:100%; float:left">
+        <div id="filterGP">
+          <label for="fGP_value">Grupos Parlamentarios</label>
+          <select id="fGP_value" name="fGP_value" multiple>
+          </select>
+        </div>
+        <div id="filterCategory">
+          <label for="fCategory_value">Categoria</label>
+          <select id="fCategory_value" name="fCategory_value" multiple>
+          </select>
+        </div>
+        <div id="filterDFrom">
+          <label for="fDFrom_value">Desde</label>
+            <div class='input-group date' id='fDFrom_value'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div id="filterDTo">
+          <label for="fDTo_value">Hasta</label>
+            <div class='input-group date' id='fDTo_value'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div id="filterValue">
+          <label for="fValue_value">Importe</label>
+          <div id="slider_container">
+          <input id="fValue_value" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <table id="podemos_table_detail" style="width:50%"></table>
+      </div>
+    </main>
+
+    <script src="js/tools.js"></script>
+    <script src="params/GP6.js"></script>
+    <script src="js/podemos_dashboard_param.js"></script>
+</body>
+</html>
+<script>
+
+</script>

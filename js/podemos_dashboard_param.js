@@ -313,7 +313,8 @@ function setup() {
 
   var stackedAreas= new c3.Plot({
     anchor: '#podemos_stacked_areas',
-    width: 500,
+    /*width: 500,*/
+    width: '100%',
     height: 350,
     filter: function (d) {
       return d.value > 0; },
@@ -425,7 +426,7 @@ function setup() {
   var treeData = d3.nest()
         .key(function(d) { return d.key;})
         .entries(category_dim.top(xf.size()));
-  charts.push(new canTree({title: "Grupos Parlamentarios"}, {key: "Total Ingresos", values: treeData }));
+  charts.push(new canTree({title: "Grupos Parlamentarios", width: '100%' }, {key: "Total Ingresos", values: treeData }));
 
   configureFilters();
 }

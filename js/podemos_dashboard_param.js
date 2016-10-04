@@ -198,56 +198,7 @@ function setup() {
         pagination: true,
         searchable: true,
         // Setup **columns** for this table
-        columns: [
-            {
-                header: { text: "Fecha" },
-                cells: {
-                  html: function (d) { return '<b>' + d.date.toLocaleString() + '</b>'; },
-                },
-                sort: function(d) {return d.date.getTime();},
-                vis: 'bar',
-            },
-            {
-                // The "Region" column is styled to have a background that matches the color for the
-                // region this country is in.
-                header: { text: "Grupo Parlamentario" },
-                cells: {
-                    text: function (d) { return d.gp; },
-                    /*styles: {
-                        'background-color': function (d) { return region_color(countries[d.key].region_id); },
-                    },*/
-                },
-                sort: function(d) {return d.gp;},
-                vis: 'bar',
-            },
-            grupo_column={
-                // These columns use custom formatters to set the html content of the cell
-                // adding commas, units, rounding, etc.  You can add raw HTML if you like.
-                // These column also use the `vis` visualization support to render a bar
-                // graph based on the cell value.
-                header: { text: "Grupo" },
-                cells: { html: function (d) { return d.group; } },
-                sort: function (d) { return d.group; },
-                vis: 'bar',
-            }, {
-                header: { text: "Subgrupo" },
-                cells: { html: function (d) { return d.subgroup; } },
-                //sort: function (d) { return Math.round(d.subgroup); },
-                //vis: 'bar',
-            },{
-                header: { text: "Categorización" },
-                cells: { html: function (d) { return d.category; } },
-                sort: function (d) { return d.category; },
-                vis: 'bar',
-            },
-            // Assign this column to a variable `gdp_column` so we can refer to it below for setting the default sort.
-            podemos_importe_column = {
-                header: { text: "Importe" },
-                cells: { html: function (d) { return (d3.format(',')(Math.round(d[COLUMNA_VALOR]))) + "€"; } },
-                //sort: function (d) { return Math.round(d.value[COLUMNA_VALOR]); },
-                //vis: 'bar',
-            },
-        ],
+        columns: columnasTabla,
         // Initial column to **sort** on.
         sort_column: grupo_column,
         // Add some padding to each cell using `cell_options.styles` to assign **styles** to **cells**

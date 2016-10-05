@@ -1,0 +1,28 @@
+{
+  "name": "PodemosDashBoard",
+  "homepage": "https://github.com/ggalancs/PodemosDashBoard",
+  "authors": [
+    "Iván Eixarch <ivan@sinanimodelucro.org>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "AGPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "c3": "^0.4.11",
+    "crossfilter": "^1.3.12",
+    "select2": "^4.0.3",
+    "font-awesome": "^4.6.3",
+    "es6-promise": "^4.0.5",
+    "seiyria-bootstrap-slider": "^9.2.0",
+    "bootstrap-datetimepicker": "^0.0.11"
+  }
+}

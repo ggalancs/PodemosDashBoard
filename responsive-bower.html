@@ -7,50 +7,31 @@
     <title>PODEMOS - Cuentas claras</title>
     <meta name="description" content="Portal de transparencia del partido político PODEMOS">
 
-    <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <!-- Fuentes -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="css/bootstrap-slider.min.css">
-    <!--
-        Stylesheets and Preprocessors
-        ==============================
+    <link href='bower_components/font-awesome/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
-        You can always bring in CSS files manually with `<link>` tags, or asynchronously
-        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
-        of Sails' conventional asset pipeline (boilerplate Gruntfile).
 
-        By default, stylesheets from your `assets/styles` folder are included
-        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
-        are supported. In production, your styles will be minified and concatenated into
-        a single file.
+    <!-- Estilos -->
+    <link href='bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <link href='bower_components/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' rel='stylesheet' type='text/css'>
+    <link href='bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css' rel='stylesheet' type='text/css'>
+    <link href='bower_components/select2/dist/css/select2.min.css' rel='stylesheet' type='text/css'>
+    <!--<link href='bower_components/c3/c3.min.css' rel='stylesheet' type='text/css'>-->
+    <link href="css/c3.min.css" rel='stylesheet' type='text/css'>
 
-        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
-        For example, here are a few things you could do:
-
-            + Change the order of your CSS files
-            + Import stylesheets from other directories
-            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
-    -->
-    <!--STYLES-->
-
-    <!--STYLES END-->
 
     <!-- Dependencies -->
-    <script src="lib/d3.v3.min.js"></script>
-    <script src="lib/crossfilter.min.js"></script>
-    <script src="lib/promise.js"></script>
-    <script src="lib/jquery-1.8.2.min.js"></script>
-    <script src="lib/jquery-3.1.1.min.js"></script>
-    <script src="lib/bootstrap.min.js"></script>
+    <script src='bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='bower_components/crossfilter/crossfilter.min.js'></script>
+    <script src='bower_components/es6-promise/es6-promise.min.js'></script>
     <script src="lib/moment-with-locales.min.js"></script>
-    <script src="lib/bootstrap-datetimepicker.js"></script>
-    <script src="lib/bootstrap-slider.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <!-- C3 -->
-    <link rel="stylesheet" href="css/c3.min.css" />
+    <script src='bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='bower_components/bootstrap-datetimepicker/build/js/bootstrap-datepicker.min.js'></script>
+    <script src='bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js'></script>
+    <script src='bower_components/d3/d3.min.js'></script>
+    <script src='bower_components/select2/dist/js/select2.min.js'></script>
+    <!--<script src='bower_components/c3/c3.min.js'></script>-->
     <script src="lib/c3.js"></script>
     <script src="lib/c3-table.js"></script>
     <script src="lib/c3-plot.js"></script>
@@ -58,9 +39,32 @@
     <script src="lib/c3-legend.js"></script>
     <script src="lib/c3-treemap.js"></script>
 
+
+    <!-- C3 
+    <script src="lib/d3.v3.min.js"></script>
+    <script src="lib/crossfilter.min.js"></script>
+    <script src="lib/promise.js"></script>
+    <script src="lib/jquery-1.8.2.min.js"></script>
+    <script src="lib/jquery-3.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/bootstrap-datetimepicker.js"></script>
+    <script src="lib/bootstrap-slider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="lib/c3.js"></script>
+    <script src="lib/c3-table.js"></script>
+    <script src="lib/c3-plot.js"></script>
+    <script src="lib/c3-layers.js"></script>
+    <script src="lib/c3-legend.js"></script>
+    <script src="lib/c3-treemap.js"></script>
+    -->
+
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css" />
     <style>
+
+body {
+  font-family: 'Open Sans' !important;
+}
 
 .select2-container, .select2-container label {
   display:block !important;
@@ -177,6 +181,7 @@ ul.c3.legend {
         <table id="podemos_table_detail"></table>
       </div>
     </main>
+
 
     <script src="js/tools.js"></script>
     <script src="params/GP6.js"></script>

@@ -1,3 +1,4 @@
+//var objParam={
 // Nombre del fichero del que se van a cargar los datos a mostrar
 var NOMBRE_FICHERO_DATOS='data/GP6.csv';
 
@@ -52,3 +53,4 @@ function cargaDatos(resolve) {
           resolve();
         });
       }
+//}

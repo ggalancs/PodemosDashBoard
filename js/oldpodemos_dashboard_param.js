@@ -2,26 +2,88 @@ var podemos_data_gps = [];
 var gps = {};
 var categories ={};
 var month = new Array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
-var periodMonth;// = month.slice(MES_INICIAL-1,MES_FINAL);
+var periodMonth = month.slice(MES_INICIAL-1,MES_FINAL);
 var cat_color = d3.scale.category20();
 var rangeMinDate = new Date("12/31/9999");
 var rangeMaxDate = new Date("01/01/1900");
 var minDate = new Date("12/31/9999");
 var maxDate = new Date("01/01/1900");
-var minValue;//=Number.MAX_VALUE;
-var maxValue;//=Number.MIN_VALUE;
+var minValue=Number.MAX_VALUE;
+var maxValue=Number.MIN_VALUE;
 
 //Parametrizar la funcion Download Data de tal manera que permitar descargar n ficheros
 //dandoles formato automaticamente y realizando los ajustes y verificaciones necesarios
 //todo ello desde un fichero de configuracion
 
+var interface_PodemosData ={
+  category: 'string',
+  gp: 'string',
+  date: 'date',
+  period: 'date',
+  entry: 'string',
+  journal: 'string',
+  analytic_account: 'string',
+  comunidad: 'string',
+  municipio: 'string',
+  account: 'string',
+  account_des: 'string',
+  group: 'string',
+  subgroup: 'string',
+  partner: 'string',
+  invoice: 'string',
+  ref: 'string',
+  name: 'string',
+  debe: 'number',
+  haber: 'number',
+  balance: 'number',
+  url: 'string'
+}
+
+var interface_GP ={
+    gp: 'string'
+}
+
 var charts=[];
+
+/*function cargaDatos(resolve) {
+      d3.tsv(NOMBRE_FICHERO_DATOS)
+        .row(function (row) { return ({
+        category: row['category'],
+        gp: row['gp'],
+        date: new Date(row['date']),
+        period: new Date(row['period']).getMonth(),
+        journal: row['journal'],
+        analytic_account: row['analytic_account'],
+        group: row['group'],
+        subgroup: row['subgroup'],
+        partner: row['partner'],
+        invoice: row['invoice'],
+        ref: row['ref'],
+        name: row['name'],
+        debe: +row['debe'],
+        haber: +row['haber'],
+        balance: +row['balance'],
+        url: ['url'],
+        key: row['category'],
+        value: +row[COLUMNA_VALOR],
+          }); })
+          .get(function (error, rows) {
+          podemos_data_gps = [];
+
+          for (var k in rows){
+            categories[rows[k].category]=[];
+            gps[rows[k].gp] = (gps[rows[k].gp])? gps[rows[k].gp] + rows[k][COLUMNA_VALOR] :rows[k][COLUMNA_VALOR];
+            podemos_data_gps.push(rows[k]);
+          }
+
+          // Resolve this promise to indicate that this dependency has been met.
+          resolve();
+        });
+      }*/
+
 
 function download_data() {
   "use strict";
-  //periodMonth = month.slice(MES_INICIAL-1,MES_FINAL);
-  //minValue=Number.MAX_VALUE;
-  //maxValue=Number.MIN_VALUE;
   return Promise.all([
     new Promise(cargaDatos),
     ]).then(function () {
@@ -30,6 +92,10 @@ function download_data() {
     });
 }
 var cat_array =[]
+
+function getAllValues(file,field){
+
+}
 
 var category_clicked=null;
 // ###########################################################################
@@ -102,18 +168,15 @@ function setup() {
     // Output the data set to the console if you want to take a look.
     //console.log("Datos:", podemos_data_gps);
     //console.log("Grupos Parlamentarios:", gps);
-  periodMonth = month.slice(MES_INICIAL-1,MES_FINAL);
-  minValue=Number.MAX_VALUE;
-  maxValue=Number.MIN_VALUE;
     xf = crossfilter(podemos_data_gps);
 
     var total_ingresos = xf.groupAll().reduceSum(function (d) { return d[COLUMNA_VALOR]; });
 
-    category_dim = xf.dimension(function (d) { return d.category });
-    month_dim = xf.dimension(function (d) { return d.period; });
-    gp_dim = xf.dimension(function (d) { return d.gp; });
-    date_dim = xf.dimension(function (d)  { return d.date; });  //{ return d.date.toLocaleDateString(); });
-    value_dim = xf.dimension(function (d) { return d[COLUMNA_VALOR]; });
+    //category_dim = xf.dimension(function (d) { return d.category });
+    //month_dim = xf.dimension(function (d) { return d.period; });
+    //gp_dim = xf.dimension(function (d) { return d.gp; });
+    //date_dim = xf.dimension(function (d)  { return d.date; });  //{ return d.date.toLocaleDateString(); });
+    //value_dim = xf.dimension(function (d) { return d[COLUMNA_VALOR]; });
 
     var timeline;
 
@@ -409,11 +472,8 @@ function addSelectElements(idControl,obj){
 // called when all of the data is loaded and promised.  This callback function calls which ends up
 // calling the `render()` function.
 // DEBUG CODE
-var file="../params/"+ parseParam("param") +".js"
-$.getScript(file).done(
-  function(script,textStatus){
-    download_data().then(function () { setTimeout(setup, 0); });
-  });
+
+download_data().then(function () { setTimeout(setup, 0); });
 // PRODUCTION CODE
 
 
